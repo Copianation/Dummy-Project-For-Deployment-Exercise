@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  app:
+    image: 'demo-app'
+    build:
+      context: ./app
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/demo
+    ports:
+      - "8080:8080"
+          
+  db:
+    image: 'demo-db'
+    build:
+      context: ./db
+    container_name: db
+    ports:
+      - "5432:5432"
